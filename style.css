@@ -2,22 +2,61 @@
   margin: 0 auto;
 }
 
+.menu {
+  width: 370px;
+  display: flex;
+  flex-flow: column;
+  margin: 20px auto;
+  text-align: center;
+  /* border: 1px solid blue; */
+}
+
+.names {
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+}
+
+.names input {
+  height: 20px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.startButton {
+  height: 30px;
+  width: 130px;
+  margin: 20px 0 0 0;
+  border-radius: 5px;
+  border: 1px solid #555;
+}
+
+.startButton:focus {
+  outline: none;
+}
+
 .container {
-  width: 400px;
-  height: 400px;
+  width: 370px;
+  height: 370px;
   display: grid;
   margin: 0 auto;
   align-items: center;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  border: 1px solid black;
+  background-color: gray;
 }
 
 .cell {
-  height: 100px;
-  width: 100px;
+  height: 120px;
+  width: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid red;
+  background-color: white;
+}
+
+.winner {
+  margin: 15px auto;
+  text-align: center;
 }

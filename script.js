@@ -75,14 +75,21 @@ const gameBoardModule = (function () {
 })();
 
 const gamePlayModule = (function () {
-
   const player1 = Player('Player 1', 'X');
   const player2 = Player('Player 2', 'O');
   let currentPlayer = player1;
 
   const container = document.querySelector('.container');
 
-  let startGame = (event) => {
+  let attachEventListeners = () => {
+    container.addEventListener('click', startGame);
+  }
+
+  let removeEventListeners = () => {
+    container.removeEventListener('click', startGame, false);
+  }
+
+  let startGame = (e) => {
     // assign players, event listeners and start the game
     container.addEventListener('click', (e) => {
       if (e.target.classList.contains('cell')) {
@@ -90,7 +97,7 @@ const gamePlayModule = (function () {
           gameBoardModule.makeMove(e, currentPlayer);
           gameBoardModule.updateDisplay(e, currentPlayer);
         if (gameBoardModule.isGameOver(currentPlayer)) {
-          // container.parentElement.removeChild(container);
+          endGame(currentPlayer);
         }
           currentPlayer = (currentPlayer === player1) ? player2 : player1;
         }
@@ -99,15 +106,20 @@ const gamePlayModule = (function () {
       //  end game                
   };
 
-  let endGame = () => {
-    console.log('game over');
+  let endGame = (winner) => {
+    removeEventListeners();
+    let winnerDisplay = document.createElement('div');
+    winnerDisplay.classList.add('winner');
+    winnerDisplay.innerHTML = `<h1>${winner.name} wins!`;
+    document.querySelector('body').appendChild(winnerDisplay);
   }
 
   return {
+    attachEventListeners,
     startGame,
     endGame
   }
 })();
 
 
-gamePlayModule.startGame();
+gamePlayModule.attachEventListeners();
